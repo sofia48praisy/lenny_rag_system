@@ -124,6 +124,12 @@ def validate_citations(content: str, sources: list[dict]) -> bool:
         return True
     labels = set(re.findall(r'\[Episode:[^\]]+\]', content))
     allowed = {s['label'] for s in sources}
+    # A passage can contain several speaker turns. Accept a precise timestamp
+    # from that retrieved passage, not just its starting timestamp.
+    for source in sources:
+        if source.get('guest'):
+            allowed.update(citation_label(source['guest'], match.group(1))
+                           for match in TIMESTAMP.finditer(source.get('excerpt', '')))
     return bool(labels) and labels.issubset(allowed)
 
 
