@@ -1,0 +1,19 @@
+.env
+.env.*
+!.env.example
+.pnpm-store/
+.local/
+recordings/
+*.mp4
+*.webm
+problem statement/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+node_modules/
+dist/
+data/raw/
+test-results/
+*.log
+*.tsbuildinfo
